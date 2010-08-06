@@ -11,8 +11,20 @@ typedef struct tree {
 // Prototypes
 void add_to_tree(tree *root_node, int data);
 tree *find(tree *root_node, int data);
+tree *find_minimum(tree *root_node);
 
 // Codez
+tree *find_minimum(tree *root_node) {
+  tree *min;  
+  min = root_node;
+  
+  while (min->left != NULL) {
+    min = min->left;
+  }
+  
+  return min;
+}
+
 tree *find(tree *root_node, int data) {
   if (root_node == NULL) { return NULL; }
   if (root_node->data == data) { 
@@ -58,6 +70,8 @@ int main (int argc, char const *argv[]) {
   int node_1_data = 1;
   int node_2_data = 2;
   
+  root.data = 0;
+  
   // Adding stuff
   add_to_tree(&root, node_1_data);
   add_to_tree(&root, node_2_data);
@@ -66,6 +80,10 @@ int main (int argc, char const *argv[]) {
   int find_data = 2;
   tree *result;
   result = find(&root, find_data);    
+  
+  // Finding min
+  tree *min;
+  min = find_minimum(&root);
   
   return 0;
 }
